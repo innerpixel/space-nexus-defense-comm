@@ -19,20 +19,31 @@ import { RouterLink, RouterView } from 'vue-router'
       </nav>
     </header>
 
-    <RouterView />
+    <main class="main-content">
+      <RouterView v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </RouterView>
+    </main>
   </div>
 </template>
 
 <style>
 .app {
   min-height: 100vh;
-  background: black;
-  color: var(--color-terminal-green);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-terminal-dark);
 }
 
 header {
-  background: var(--color-terminal-dark);
+  background: rgba(10, 10, 10, 0.9);
   border-bottom: 1px solid var(--color-terminal-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
 }
 
 nav {
@@ -49,29 +60,29 @@ nav {
   align-items: center;
 }
 
-.nav-brand a {
-  color: var(--color-terminal-green);
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-decoration: none;
+.main-content {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
-.nav-links {
-  display: flex;
-  gap: 2rem;
-}
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+  }
 
-.nav-links a {
-  color: var(--color-terminal-green);
-  text-decoration: none;
-  transition: opacity 0.3s ease;
-}
+  nav {
+    height: auto;
+  }
 
-.nav-links a:hover {
-  opacity: 0.8;
-}
-
-.nav-links a.router-link-active {
-  border-bottom: 2px solid var(--color-terminal-green);
+  .nav-links {
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 </style>

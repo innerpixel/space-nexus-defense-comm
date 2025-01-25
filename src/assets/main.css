@@ -7,68 +7,105 @@
   --font-terminal: 'Courier New', monospace;
 }
 
-body {
-  background-color: black;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background-color: var(--color-terminal-dark);
   color: var(--color-terminal-green);
   margin: 0;
   font-family: var(--font-terminal);
+  line-height: 1.6;
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-a,
-.green {
+a {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+  color: var(--color-terminal-green);
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 4px;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+a:hover {
+  background-color: rgba(51, 255, 51, 0.1);
+  box-shadow: 0 0 10px rgba(51, 255, 51, 0.2);
+}
+
+/* Navigation Styles */
+.nav-brand a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--color-terminal-green);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links a {
+  position: relative;
+}
+
+.nav-links a.router-link-active {
+  background-color: rgba(51, 255, 51, 0.1);
+  box-shadow: 0 0 10px rgba(51, 255, 51, 0.2);
+}
+
+.nav-links a.router-link-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-terminal-green);
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+/* Animations */
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px var(--color-terminal-green),
+                0 0 10px var(--color-terminal-green),
+                0 0 15px var(--color-terminal-green);
+  }
+  to {
+    box-shadow: 0 0 10px var(--color-terminal-green),
+                0 0 20px var(--color-terminal-green),
+                0 0 30px var(--color-terminal-green);
   }
 }
 
-@media (min-width: 1024px) {
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 /* Transitions */
-.message-enter-active,
-.message-leave-active {
-  transition: all 0.5s ease;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
 }
 
-.message-enter-from {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
-  transform: translateX(-20px);
-}
-
-.message-leave-to {
-  opacity: 0;
-  transform: translateX(20px);
-}
-
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-terminal-dark);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-terminal-border);
-  border-radius: 4px;
 }
