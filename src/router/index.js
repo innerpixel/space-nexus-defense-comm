@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import CommunicationsView from '../views/CommunicationsView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(process.env.BASE_URL),
   routes: [
     {
       path: '/',

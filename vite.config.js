@@ -5,6 +5,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/space-nexus-defense-comm/',
   plugins: [
     vue(),
     vueDevTools(),
@@ -12,9 +13,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
-    },
+    }
   },
-  base: process.env.NODE_ENV === 'production' ? '/space-nexus-defense-comm/' : '/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
