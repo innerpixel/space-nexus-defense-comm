@@ -1,0 +1,74 @@
+:root {
+  --color-terminal-green: #33ff33;
+  --color-terminal-dark: #0a0a0a;
+  --color-terminal-border: #30af30;
+  --color-alert: #ff3333;
+  --color-warning: #ffff33;
+  --font-terminal: 'Courier New', monospace;
+}
+
+body {
+  background-color: black;
+  color: var(--color-terminal-green);
+  margin: 0;
+  font-family: var(--font-terminal);
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  }
+}
+
+/* Transitions */
+.message-enter-active,
+.message-leave-active {
+  transition: all 0.5s ease;
+}
+
+.message-enter-from {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.message-leave-to {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-terminal-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-terminal-border);
+  border-radius: 4px;
+}

@@ -1,0 +1,54 @@
+{
+  "name": "space-nexus-defense-comm",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A sci-fi themed communication console with video surveillance and AI assistance",
+  "author": "Cosmic Nexus Team",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --fix",
+    "test": "vitest",
+    "docs": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "dependencies": {
+    "pinia": "^2.3.1",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "axios": "^1.7.9",
+    "@tensorflow/tfjs": "^4.15.0",
+    "@mediapipe/face-detection": "^0.4.1",
+    "face-api.js": "^0.22.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "@heroicons/vue": "^2.2.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/test-utils": "^2.4.0",
+    "eslint": "^9.18.0",
+    "eslint-plugin-vue": "^9.32.0",
+    "vite": "^6.0.11",
+    "vite-plugin-vue-devtools": "^7.7.0",
+    "vitepress": "^1.0.0",
+    "vitest": "^1.2.0"
+  },
+  "keywords": [
+    "vue",
+    "communication",
+    "ai",
+    "video",
+    "surveillance",
+    "sci-fi",
+    "space",
+    "defense"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cosmic-nexus/space-nexus-defense-comm"
+  },
+  "license": "MIT"
+}
