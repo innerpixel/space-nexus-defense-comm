@@ -5,67 +5,104 @@
       <div class="status-indicator" :class="{ active: isActive }"></div>
     </div>
     
-    <div ref="messagesContainer" class="messages-container">
-      <TransitionGroup name="message">
-        <div v-for="(message, index) in messages" 
-             :key="index" 
-             class="message"
-             :class="message.type.toLowerCase()">
-          <span class="timestamp">{{ message.timestamp }}</span>
-          <span class="type">{{ message.type }}:</span>
-          <span class="content">{{ message.content }}</span>
-        </div>
-      </TransitionGroup>
+    <div class="messages-container" ref="messagesContainer">
+      <div v-for="(message, index) in messages" 
+           :key="index" 
+           class="message"
+           :class="message.type.toLowerCase()">
+        <span class="timestamp">{{ message.timestamp }}</span>
+        <span class="type">{{ message.type }}:</span>
+        <span class="content">{{ message.content }}</span>
+      </div>
     </div>
 
     <div class="console-controls">
-      <button v-for="type in ['ALERT', 'WARNING', 'STATUS']" 
-              :key="type"
-              @click="generateMessage(type)"
-              :class="type.toLowerCase()">
-        {{ type }}
-      </button>
+      <button @click="generateMessage('ALERT')" class="control-btn alert">ALERT</button>
+      <button @click="generateMessage('WARNING')" class="control-btn warning">WARNING</button>
+      <button @click="generateMessage('STATUS')" class="control-btn status">STATUS</button>
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from 'vue'
-import { useCommunicationsStore } from '@/stores/communications'
-import { storeToRefs } from 'pinia'
+<script>
+export default {
+  name: 'CommunicationConsole',
+  data() {
+    return {
+      isActive: true,
+      messages: [],
+      messageTypes: ['ALERT', 'WARNING', 'STATUS', 'UPDATE', 'NOTICE']
+    }
+  },
+  mounted() {
+    // Generate initial messages
+    this.generateMessage('STATUS')
+    this.startRandomMessages()
+  },
+  methods: {
+    generateMessage(type) {
+      const presetMessages = {
+        ALERT: [
+          'Incoming transmission from Starbase Alpha',
+          'Unidentified vessel approaching from vector 359',
+          'Hostile entities detected in lower decks'
+        ],
+        WARNING: [
+          'Shield capacity at 65%',
+          'Minor fluctuations in warp core',
+          'Environmental systems need maintenance'
+        ],
+        STATUS: [
+          'All systems nominal',
+          'Routine maintenance completed',
+          'Ship status: Green'
+        ]
+      }
 
-const store = useCommunicationsStore()
-const { messages, isActive } = storeToRefs(store)
-const messagesContainer = ref(null)
+      const messages = presetMessages[type] || presetMessages.STATUS
+      const message = {
+        type,
+        content: messages[Math.floor(Math.random() * messages.length)],
+        timestamp: new Date().toLocaleTimeString()
+      }
 
-const generateMessage = (type) => {
-  store.generateMessage(type)
+      this.messages.push(message)
+      this.$nextTick(() => {
+        const container = this.$refs.messagesContainer
+        container.scrollTop = container.scrollHeight
+      })
+    },
+    startRandomMessages() {
+      setInterval(() => {
+        const randomType = this.messageTypes[Math.floor(Math.random() * this.messageTypes.length)]
+        this.generateMessage(randomType)
+      }, 5000)
+    }
+  }
 }
-
-onMounted(() => {
-  store.generateMessage('STATUS')
-  store.startRandomMessages()
-})
 </script>
 
 <style scoped>
 .communication-console {
-  background: var(--color-terminal-dark);
-  border: 2px solid var(--color-terminal-border);
+  background-color: #0a0a0a;
+  border: 2px solid #33ff33;
   border-radius: 8px;
   padding: 20px;
-  height: 100%;
+  height: 500px;
   display: flex;
   flex-direction: column;
+  font-family: 'Courier New', monospace;
+  color: #33ff33;
+  box-shadow: 0 0 20px rgba(51, 255, 51, 0.2);
 }
 
 .console-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--color-terminal-border);
+  margin-bottom: 20px;
   padding-bottom: 10px;
-  margin-bottom: 15px;
+  border-bottom: 1px solid #33ff33;
 }
 
 .console-title {
@@ -77,52 +114,52 @@ onMounted(() => {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--color-alert);
-  transition: all 0.3s ease;
+  background-color: #333;
 }
 
 .status-indicator.active {
-  background: var(--color-terminal-green);
-  box-shadow: 0 0 10px rgba(51, 255, 51, 0.5);
+  background-color: #33ff33;
+  box-shadow: 0 0 10px #33ff33;
+  animation: pulse 2s infinite;
 }
 
 .messages-container {
-  flex: 1;
-  min-height: 300px;
+  flex-grow: 1;
   overflow-y: auto;
-  margin-bottom: 15px;
-  padding: 10px;
-  border: 1px solid var(--color-terminal-border);
-  border-radius: 4px;
+  margin-bottom: 20px;
+  padding-right: 10px;
 }
 
 .message {
   margin-bottom: 10px;
   padding: 8px;
   border-radius: 4px;
-  background: rgba(48, 175, 48, 0.1);
-}
-
-.message .timestamp {
-  color: #888;
-  margin-right: 10px;
-}
-
-.message .type {
-  font-weight: bold;
-  margin-right: 10px;
+  background-color: rgba(51, 255, 51, 0.1);
 }
 
 .message.alert {
-  border-left: 3px solid var(--color-alert);
+  background-color: rgba(255, 0, 0, 0.2);
+  border-left: 3px solid #ff0000;
 }
 
 .message.warning {
-  border-left: 3px solid var(--color-warning);
+  background-color: rgba(255, 165, 0, 0.2);
+  border-left: 3px solid #ffa500;
 }
 
 .message.status {
-  border-left: 3px solid var(--color-terminal-green);
+  border-left: 3px solid #33ff33;
+}
+
+.timestamp {
+  font-size: 0.8em;
+  opacity: 0.7;
+  margin-right: 10px;
+}
+
+.type {
+  font-weight: bold;
+  margin-right: 10px;
 }
 
 .console-controls {
@@ -130,47 +167,48 @@ onMounted(() => {
   gap: 10px;
 }
 
-.console-controls button {
-  background: transparent;
+.control-btn {
+  background-color: transparent;
+  border: 1px solid #33ff33;
+  color: #33ff33;
   padding: 8px 16px;
-  border-radius: 4px;
   cursor: pointer;
-  font-family: var(--font-terminal);
   transition: all 0.3s ease;
+  font-family: 'Courier New', monospace;
 }
 
-.console-controls button:hover {
-  background: rgba(48, 175, 48, 0.2);
+.control-btn:hover {
+  background-color: rgba(51, 255, 51, 0.2);
 }
 
-.console-controls button.alert {
-  border: 1px solid var(--color-alert);
-  color: var(--color-alert);
+.control-btn.alert {
+  border-color: #ff0000;
+  color: #ff0000;
 }
 
-.console-controls button.warning {
-  border: 1px solid var(--color-warning);
-  color: var(--color-warning);
+.control-btn.alert:hover {
+  background-color: rgba(255, 0, 0, 0.2);
 }
 
-.console-controls button.status {
-  border: 1px solid var(--color-terminal-green);
-  color: var(--color-terminal-green);
+.control-btn.warning {
+  border-color: #ffa500;
+  color: #ffa500;
 }
 
-.message-enter-active,
-.message-leave-active {
-  transition: all 0.5s ease;
+.control-btn.warning:hover {
+  background-color: rgba(255, 165, 0, 0.2);
 }
 
-.message-enter-from {
-  opacity: 0;
-  transform: translateX(-20px);
-}
-
-.message-leave-to {
-  opacity: 0;
-  transform: translateX(20px);
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(51, 255, 51, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(51, 255, 51, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(51, 255, 51, 0);
+  }
 }
 
 ::-webkit-scrollbar {
@@ -178,11 +216,11 @@ onMounted(() => {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-terminal-dark);
+  background: #0a0a0a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-terminal-border);
+  background: #30af30;
   border-radius: 4px;
 }
 </style>

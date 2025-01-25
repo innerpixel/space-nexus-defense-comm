@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "homepage": "https://innerpixel.github.io/space-nexus-defense-comm/",
   "description": "A sci-fi themed communication console with video surveillance and AI assistance",
   "author": "Cosmic Nexus Team",
   "scripts": {
@@ -16,22 +17,22 @@
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
-    "pinia": "^2.3.1",
-    "vue": "^3.5.13",
-    "vue-router": "^4.5.0",
-    "axios": "^1.7.9",
-    "@tensorflow/tfjs": "^4.15.0",
-    "face-api.js": "^0.22.2"
+    "@tensorflow/tfjs": "^4.17.0",
+    "face-api.js": "^0.22.2",
+    "pinia": "^2.1.7",
+    "vue": "^3.4.15",
+    "vue-router": "^4.2.5",
+    "axios": "^1.7.9"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
     "@heroicons/vue": "^2.2.0",
-    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue": "^5.0.3",
     "@vue/test-utils": "^2.4.0",
     "eslint": "^9.18.0",
     "eslint-plugin-vue": "^9.32.0",
-    "vite": "^6.0.11",
-    "vite-plugin-vue-devtools": "^7.7.0",
+    "vite": "^5.0.11",
+    "vite-plugin-vue-devtools": "^7.0.13",
     "vitepress": "^1.0.0",
     "vitest": "^1.2.0"
   },

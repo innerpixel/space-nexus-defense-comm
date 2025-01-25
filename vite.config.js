@@ -14,7 +14,7 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
-  base: '/space-nexus-defense-comm/',
+  base: process.env.NODE_ENV === 'production' ? '/space-nexus-defense-comm/' : '/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
@@ -24,17 +24,16 @@ export default defineConfig({
         manualChunks: {
           'vendor': ['vue', 'vue-router', 'pinia'],
           'ai': ['@tensorflow/tfjs', 'face-api.js'],
-        },
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'favicon.ico') return 'favicon.ico'
-          return 'assets/[name]-[hash][extname]'
         }
       }
-    }
+    },
+    emptyOutDir: true,
+    copyPublicDir: true
   },
   server: {
     fs: {
-      strict: false
+      strict: false,
+      allow: ['..']
     }
   }
 })
