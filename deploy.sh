@@ -16,7 +16,7 @@ git init
 git add -A
 git commit -m 'deploy'
 
-# if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:cosmic-nexus/space-nexus-defense-comm.git main:gh-pages
+# deploy to gh-pages branch
+git push -f https://github.com/innerpixel/space-nexus-defense-comm.git main:gh-pages
 
 cd -
