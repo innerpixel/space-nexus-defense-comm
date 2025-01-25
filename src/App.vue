@@ -13,6 +13,10 @@ import { RouterLink, RouterView } from 'vue-router'
           <div class="nav-links">
             <RouterLink to="/">Home</RouterLink>
             <RouterLink to="/communications">Communications</RouterLink>
+            <RouterLink to="/chat">
+              Video Chat
+              <span class="new-badge">NEW</span>
+            </RouterLink>
             <RouterLink to="/about">About</RouterLink>
           </div>
         </div>
@@ -60,12 +64,49 @@ nav {
   align-items: center;
 }
 
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.new-badge {
+  background: var(--color-terminal-green);
+  color: var(--color-terminal-dark);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}
+
 .main-content {
   flex: 1;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @media (max-width: 768px) {
