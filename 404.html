@@ -1,24 +1,104 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Space Nexus Defense Communications</title>
-    <script type="text/javascript">
-      // Single Page Apps for GitHub Pages
-      // MIT License
-      // https://github.com/rafgraph/spa-github-pages
-      var pathSegmentsToKeep = 1;
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Sector Not Found</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0a0a0a;
+            color: #33ff33;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
 
-      var l = window.location;
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-        l.hash
-      );
+        .container {
+            padding: 20px;
+            border: 2px solid #33ff33;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(51, 255, 51, 0.2);
+            max-width: 600px;
+            margin: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(51, 255, 51, 0.5);
+        }
+
+        .error-code {
+            font-size: 8em;
+            margin: 0;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(51, 255, 51, 0.5);
+        }
+
+        p {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 2px solid #33ff33;
+            border-radius: 4px;
+            color: #33ff33;
+            text-decoration: none;
+            font-size: 1.1em;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: rgba(51, 255, 51, 0.2);
+            box-shadow: 0 0 15px rgba(51, 255, 51, 0.3);
+        }
+
+        .scanner {
+            width: 100%;
+            height: 4px;
+            background: #33ff33;
+            position: relative;
+            animation: scan 2s linear infinite;
+            box-shadow: 0 0 10px rgba(51, 255, 51, 0.5);
+        }
+
+        @keyframes scan {
+            0% {
+                transform: translateY(-100px);
+            }
+            100% {
+                transform: translateY(100px);
+            }
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            // Redirect to home page with proper base URL
+            document.querySelector('.btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = '/space-nexus-defense-comm/';
+            });
+        }
     </script>
-  </head>
-  <body>
-  </body>
+</head>
+<body>
+    <div class="container">
+        <div class="scanner"></div>
+        <h1>SYSTEM MALFUNCTION</h1>
+        <div class="error-code">404</div>
+        <p>SECTOR NOT FOUND IN NAVIGATIONAL DATABASE</p>
+        <p>The coordinates you are trying to reach do not exist in our star charts.</p>
+        <a href="/space-nexus-defense-comm/" class="btn">RETURN TO BRIDGE</a>
+    </div>
+</body>
 </html>
