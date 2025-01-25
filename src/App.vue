@@ -11,7 +11,8 @@ import { RouterLink, RouterView } from 'vue-router'
             <RouterLink to="/">SPACE NEXUS</RouterLink>
           </div>
           <div class="nav-links">
-            <RouterLink to="/">Communications</RouterLink>
+            <RouterLink to="/">Home</RouterLink>
+            <RouterLink to="/communications">Communications</RouterLink>
             <RouterLink to="/about">About</RouterLink>
           </div>
         </div>
@@ -26,6 +27,7 @@ import { RouterLink, RouterView } from 'vue-router'
 .app {
   min-height: 100vh;
   background: black;
+  color: var(--color-terminal-green);
 }
 
 header {
@@ -49,30 +51,24 @@ nav {
 
 .nav-brand a {
   color: var(--color-terminal-green);
-  text-decoration: none;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-.nav-brand a:hover {
-  color: rgba(51, 255, 51, 0.8);
+  text-decoration: none;
 }
 
 .nav-links {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .nav-links a {
   color: var(--color-terminal-green);
   text-decoration: none;
-  padding: 0.5rem 0;
-  transition: color 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: rgba(51, 255, 51, 0.8);
+  opacity: 0.8;
 }
 
 .nav-links a.router-link-active {
